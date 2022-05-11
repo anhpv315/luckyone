@@ -1,4 +1,4 @@
-com.example.joy_app
+com.example.lucky_one
 attr activityAction
 attr activityName
 attr alpha

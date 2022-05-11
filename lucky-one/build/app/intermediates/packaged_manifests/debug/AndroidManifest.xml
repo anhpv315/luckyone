@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.joy_app"
+    package="com.example.lucky_one"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -17,9 +17,9 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="joy_app" >
+        android:label="lucky_one" >
         <activity
-            android:name="com.example.joy_app.MainActivity"
+            android:name="com.example.lucky_one.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"

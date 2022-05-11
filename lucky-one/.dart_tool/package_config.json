@@ -68,6 +68,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "get",
+      "rootUri": "file:///C:/Environment/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///C:/Environment/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
       "packageUri": "lib/",
@@ -94,6 +100,24 @@
     {
       "name": "path",
       "rootUri": "file:///C:/Environment/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///C:/Environment/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.26.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sensors",
+      "rootUri": "file:///C:/Environment/flutter/.pub-cache/hosted/pub.dartlang.org/sensors-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "shake_event",
+      "rootUri": "file:///C:/Environment/flutter/.pub-cache/hosted/pub.dartlang.org/shake_event-0.0.9",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -158,7 +182,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-05-11T06:11:19.504297Z",
+  "generated": "2022-05-11T09:38:45.042673Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

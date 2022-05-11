@@ -1,26 +1,15 @@
-
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:lucky_one/ulti/Randomize.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class DiceApp extends StatefulWidget {
+  const DiceApp({Key? key}) : super(key: key);
   //if data comes from another page then all the variables, names and function will be here
   @override
-  _HomeState createState() => _HomeState();
+  _DiceAppState createState() => _DiceAppState();
 }
 
-class _HomeState extends State<Home> {
+class _DiceAppState extends State<DiceApp> {
   //all function or variables of main.dart will be here
-
-  void changeDiceFace(){
-    //to update things we use setstate()
-    setState(() {
-
-    });
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +50,7 @@ class _HomeState extends State<Home> {
           ),
       ),
       // appBar: AppBar(
-      //   title: Text('Home'),
+      //   title: Text('DiceApp'),
       //   centerTitle: true,
       //   backgroundColor: Colors.blue,
       // ),

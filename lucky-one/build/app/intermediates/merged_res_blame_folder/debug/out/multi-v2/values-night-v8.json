@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Project\\Dice-Game-main\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "C:\\Project\\luckyone\\lucky-one\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Project\\Dice-Game-main\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Project\\luckyone\\lucky-one\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
