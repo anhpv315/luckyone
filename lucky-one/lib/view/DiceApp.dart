@@ -32,11 +32,11 @@ class DiceApp extends StatelessWidget {
       await Future.delayed(Duration(milliseconds: 50));
     }
     listResult.add(sum);
-    print(sum);
+    // print(sum);
     if (listResult.length > 6) {
       listResult.removeAt(0);
     }
-    print(listResult);
+    // print(listResult);
     _diceController.listResult.value = listResult;
     _diceController.listResult.refresh();
     _diceController.rolling.value = false;
@@ -90,7 +90,7 @@ class DiceApp extends StatelessWidget {
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           onPressed: () {
             if (_diceController.rolling.value) {
-              print('rolling');
+              // print('rolling');
             } else {
               changeDiceFace();
             }
@@ -157,7 +157,7 @@ class DiceApp extends StatelessWidget {
         backgroundColor: AppTheme.white,
         onPressed: () {
           if (_diceController.rolling.value) {
-            print('rolling');
+            // print('rolling');
           } else {
             _diceController.addDice();
           }
