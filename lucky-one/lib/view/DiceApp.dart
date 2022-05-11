@@ -46,14 +46,13 @@ class DiceApp extends StatelessWidget {
     List<Widget> list1 = [];
     for (var i = 0; i < listResult.length; i++) {
       list1.add(Container(
+        color: i == listResult.length-1? AppTheme.white.withOpacity(0.2): AppTheme.nearlyBlack,
+        padding: EdgeInsets.all(10),
         child: Text(listResult[i].toString(),
             style: TextStyle(
                 color: AppTheme.white,
                 fontSize: 18,
                 fontWeight: FontWeight.w600)),
-      ));
-      list1.add(SizedBox(
-        width: 20,
       ));
     }
 
