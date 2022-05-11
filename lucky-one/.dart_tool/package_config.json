@@ -152,13 +152,13 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "joy_app",
+      "name": "lucky_one",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-05-11T01:44:16.316682Z",
+  "generated": "2022-05-11T06:11:19.504297Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

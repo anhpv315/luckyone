@@ -1,4 +1,4 @@
-# joy_app
+# lucky_one
 
 A new Flutter project.
 

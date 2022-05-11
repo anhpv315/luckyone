@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.joy_app">
+    package="com.example.lucky_one">
    <application
-        android:label="joy_app"
+        android:label="lucky_one"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
