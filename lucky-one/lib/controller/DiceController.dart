@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 class DiceController extends GetxController {
   var listDiceFaces = List<int>.empty().obs;
+  var rolling = false.obs;
+  var listResult =  List<int>.empty().obs;
 
   addDice() {
       if(listDiceFaces.length >= 4){
@@ -10,6 +12,10 @@ class DiceController extends GetxController {
         return;
       }
       listDiceFaces.add(6);
+  }
+
+  isRolling(){
+    return rolling.value;
   }
 
 }

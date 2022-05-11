@@ -2,57 +2,62 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/DiceController.dart';
+import 'package:lucky_one/ulti/AppTheme.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 import 'package:shake_event/shake_event.dart';
-class DiceApp extends StatefulWidget {
-  const DiceApp({Key? key}) : super(key: key);
-  //if data comes from another page then all the variables, names and function will be here
-  @override
-  _DiceAppState createState() => _DiceAppState();
-}
 
-class _DiceAppState extends State<DiceApp> with ShakeHandler {
+class DiceApp extends StatelessWidget {
   //all function or variables of main.dart will be here
 
   final DiceController _diceController = Get.put(DiceController());
 
-  int leftDiceNumber = 1;
-  int rightDiceNumber = 6;
-
-  @override
-  void initState() {
-    startListeningShake(20); //20 is the default threshold value for the shake event
-    super.initState();
-  }
-
-  @override
-  shakeEventListener() {
-    changeDiceFace();
-    return super.shakeEventListener();
-  }
-
-  @override
-  void dispose() {
-    resetShakeListeners();
-    super.dispose();
-  }
-
-
   Future<void> changeDiceFace() async {
+    var listResult = _diceController.listResult.value;
+    _diceController.rolling.value = true;
     //to update things we use setstate()
     // setState(() {
     //   leftDiceNumber = Random().nextInt(6)+1;
     //   rightDiceNumber = Random().nextInt(6)+1;
     // });
-    for(var s = 1; s < 69; s++){
-      for(var i = 0; i < _diceController.listDiceFaces.length; i++){
+    var sum = 0;
+    for (var s = 0; s < 69; s++) {
+      for (var i = 0; i < _diceController.listDiceFaces.length; i++) {
         _diceController.listDiceFaces[i] = Randomize().randomDice();
+        if (s == 68) {
+          sum += _diceController.listDiceFaces[i];
+        }
       }
       await Future.delayed(Duration(milliseconds: 50));
     }
-    // print(Randomize().randomDice());
+    listResult.add(sum);
+    print(sum);
+    if (listResult.length > 6) {
+      listResult.removeAt(0);
+    }
+    print(listResult);
+    _diceController.listResult.value = listResult;
+    _diceController.listResult.refresh();
+    _diceController.rolling.value = false;
+  }
 
+  Widget _preResults(List<int> listResult) {
+    List<Widget> list1 = [];
+    for (var i = 0; i < listResult.length; i++) {
+      list1.add(Container(
+        child: Text(listResult[i].toString(),
+            style: TextStyle(
+                color: AppTheme.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600)),
+      ));
+      list1.add(SizedBox(
+        width: 20,
+      ));
+    }
+
+    return Row(children: list1);
   }
 
   Widget _listDiceFaceWidgets(List<int> list, BuildContext context) {
@@ -85,7 +90,11 @@ class _DiceAppState extends State<DiceApp> with ShakeHandler {
           height: 100,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           onPressed: () {
-            changeDiceFace();
+            if (_diceController.rolling.value) {
+              print('rolling');
+            } else {
+              changeDiceFace();
+            }
           },
           child: Image(
             image: AssetImage('images/dice' + list[i].toString() + '.png'),
@@ -112,10 +121,13 @@ class _DiceAppState extends State<DiceApp> with ShakeHandler {
 
   @override
   Widget build(BuildContext context) {
+    _diceController.listDiceFaces.length = 0;
     _diceController.addDice();
+    var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.indigoAccent,
+      drawer: MyDrawer(),
+      backgroundColor: AppTheme.nearlyBlack,
       // appBar: AppBar(
       //   title: Text('DiceApp'),
       //   centerTitle: true,
@@ -130,14 +142,31 @@ class _DiceAppState extends State<DiceApp> with ShakeHandler {
               () =>
                   _listDiceFaceWidgets(_diceController.listDiceFaces, context),
             ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+                padding: EdgeInsets.only(left: 10),
+                // color: Colors.red,
+                width: (width - 100),
+                height: 50,
+                child: Obx(() => _preResults(_diceController.listResult))),
           )
         ],
       )),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppTheme.white,
         onPressed: () {
-          _diceController.addDice();
+          if (_diceController.rolling.value) {
+            print('rolling');
+          } else {
+            _diceController.addDice();
+          }
         },
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: AppTheme.nearlyBlack,
+        ),
       ),
     );
   }
