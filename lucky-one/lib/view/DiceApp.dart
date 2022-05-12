@@ -96,7 +96,7 @@ class DiceApp extends StatelessWidget {
             }
           },
           child: Image(
-            image: AssetImage('images/dice' + list[i].toString() + '.png'),
+            image: AssetImage('assets/images/dice' + list[i].toString() + '.png'),
             width: 100,
             height: 100,
           ),
