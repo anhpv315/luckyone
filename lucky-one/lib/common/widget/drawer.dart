@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lucky_one/controller/MainController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
-import 'package:lucky_one/view/DiceApp.dart';
-import 'package:lucky_one/view/WheelApp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class MyDrawer extends StatelessWidget {
   final MainController main = Get.find();
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       // Add a ListView to the drawer. This ensures the user can scroll
       // through the options in the drawer if there isn't enough vertical
       // space to fit everything.
       backgroundColor: AppTheme.white,
       child: Container(
-        color: AppTheme.notWhite,
+        color: AppTheme.white,
         child:ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
@@ -45,11 +45,13 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {
+            onTap: () async {
               // Update the state of the app
               // ...
               // Then close the drawer
               main.currentScreen.value = 0;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('screenID', '0');
             },
           ),
           Divider(color: AppTheme.nearlyBlack.withOpacity(0.8),),
@@ -131,11 +133,13 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {
+            onTap: () async {
               // Update the state of the app
               // ...
               // Then close the drawer
               main.currentScreen.value = 4;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('screenID', '4');
             },
           ),
           Divider(color: AppTheme.nearlyBlack.withOpacity(0.8),),

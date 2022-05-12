@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lucky_one/controller/MainController.dart';
-import 'package:lucky_one/view/DiceApp.dart';
-import 'package:lucky_one/view/WheelApp.dart';
-import 'package:lucky_one/view/splash_screen.dart';
+
 
 import 'Home.dart';
 

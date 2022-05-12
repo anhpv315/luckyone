@@ -32,6 +32,18 @@ class DiceApp extends StatelessWidget {
       await Future.delayed(Duration(milliseconds: 50));
     }
     listResult.add(sum);
+    Get.snackbar(
+        "Result",
+        sum.toString(),
+        titleText: Text(
+          "Result",
+          style: TextStyle(color: AppTheme.white),
+        ),
+        messageText: Text(
+            sum.toString(),
+            style: TextStyle(color: AppTheme.white, fontSize: 20)),
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 3));
     // print(sum);
     if (listResult.length > 6) {
       listResult.removeAt(0);
@@ -40,6 +52,7 @@ class DiceApp extends StatelessWidget {
     _diceController.listResult.value = listResult;
     _diceController.listResult.refresh();
     _diceController.rolling.value = false;
+
   }
 
   Widget _preResults(List<int> listResult) {
@@ -154,7 +167,7 @@ class DiceApp extends StatelessWidget {
         ],
       )),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: AppTheme.white,
+        backgroundColor: AppTheme.nearlyWhite,
         onPressed: () {
           if (_diceController.rolling.value) {
             // print('rolling');
@@ -164,7 +177,7 @@ class DiceApp extends StatelessWidget {
         },
         child: Icon(
           Icons.add,
-          color: AppTheme.nearlyBlack,
+          color: AppTheme.white,
         ),
       ),
     );
