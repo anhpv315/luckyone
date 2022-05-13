@@ -150,6 +150,7 @@ class LuckyNumberApp extends StatelessWidget {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: AppTheme.nearlyWhite),
                 onPressed: () async {
+                  _luckyNumberController.rolling.value = true;
                   for (var i = 0;
                   i < _luckyNumberController.listResult.length;
                   i++) {
@@ -194,6 +195,7 @@ class LuckyNumberApp extends StatelessWidget {
                         snackPosition: SnackPosition.BOTTOM,
                         duration: Duration(seconds: 3));
                   }
+                  _luckyNumberController.rolling.value = false;
                 },
                 child: Icon(Icons.wifi_protected_setup, color: AppTheme.white)),
           ),
