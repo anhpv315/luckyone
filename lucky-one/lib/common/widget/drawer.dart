@@ -179,11 +179,10 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
+            onTap: () async {
+              main.currentScreen.value = 6;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('screenID', '6');
             },
           ),
           Divider(color: AppTheme.nearlyBlack.withOpacity(0.8),),
