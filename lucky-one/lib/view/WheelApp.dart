@@ -57,7 +57,7 @@ class WheelApp extends StatelessWidget {
                 borderWidth: 10, // <-- custom circle slice stroke width
               ),
               onTap: () {
-                if(_wheelController.rolling.value){
+                if (_wheelController.rolling.value) {
                   return;
                 }
                 int random = Randomize().randomInRange(list.length);
@@ -75,22 +75,22 @@ class WheelApp extends StatelessWidget {
           _wheelController.rolling.value = true;
         },
         onAnimationEnd: () async {
-          Get.snackbar(
-            "Result",
-            _wheelController.listItems[_wheelController.selected.value],
+          Get.snackbar("Result",
+              _wheelController.listItems[_wheelController.selected.value],
               titleText: Text(
                 "Result",
                 style: TextStyle(color: AppTheme.white),
               ),
               messageText: Text(
                   _wheelController.listItems[_wheelController.selected.value],
-                  style: TextStyle(color: AppTheme.white, fontSize: 20)),
+                  style: TextStyle(color: AppTheme.white, fontSize: 18)),
               snackPosition: SnackPosition.BOTTOM,
               duration: Duration(seconds: 3));
-            _wheelController.oldResult.value = _wheelController.listItems[_wheelController.selected.value];
+          _wheelController.oldResult.value =
+              _wheelController.listItems[_wheelController.selected.value];
           await Future.delayed(Duration(seconds: 2));
           _wheelController.rolling.value = false;
-          if(_wheelController.decrease.value){
+          if (_wheelController.decrease.value) {
             _wheelController.deleteItem(_wheelController.selected.value);
           }
         },
@@ -154,8 +154,7 @@ class WheelApp extends StatelessWidget {
                 height: 50,
                 child: Obx(() => Opacity(
                       opacity: 1,
-                      child: Text(
-                          _wheelController.oldResult.value,
+                      child: Text(_wheelController.oldResult.value,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: AppTheme.white,
@@ -194,12 +193,42 @@ class WheelApp extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child:
-                                Text('Enter your list, seperate by comma (,).'),
+                                Column(
+                                  children: [
+                                    Text('Enter your list,', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
+                                    Text('separate by a comma ","!', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
+                                    SizedBox(height: 5,),
+                                    Text('Example: "banana, strawberry, apple"', style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14),),
+                                  ],
+                                )
                           ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _inputController,
+                              decoration: InputDecoration(
+                                  fillColor: AppTheme.dark_grey.withOpacity(0.1),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderSide: BorderSide(
+                                      color: AppTheme.dark_grey.withOpacity(0.8),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderSide: BorderSide(
+                                      color: AppTheme.dark_grey.withOpacity(0.3),
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  labelText: "List of options",
+                                  labelStyle:
+                                  TextStyle(color: AppTheme.dark_grey.withOpacity(0.8)),
+                                  filled: true,
+                                  isDense: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                                  )),
                             ),
                           ),
                           Row(
@@ -228,10 +257,44 @@ class WheelApp extends StatelessWidget {
                                   onPressed: () {
                                     print(_inputController.text);
                                     var arr = _inputController.text.split(',');
+                                    var invalidArr = [];
                                     if (arr.length > 1) {
-                                      _wheelController.newList(arr);
+                                      for (var i = 0; i < arr.length; i++) {
+                                        arr[i] = arr[i].trim();
+                                        if (arr[i].isEmpty) {
+                                          invalidArr.add(i);
+                                        }
+                                      }
+                                      if (invalidArr.isNotEmpty) {
+                                        for (var i = 0;
+                                            i < invalidArr.length;
+                                            i++) {
+                                          arr.removeAt(invalidArr[i]);
+                                        }
+                                      }
+                                      if (arr.length > 1) {
+                                        _wheelController.newList(arr);
+                                        Navigator.of(context).pop();
+                                        return;
+                                      }
                                     }
+
+                                    Get.snackbar("Invalid",
+                                        "It must has at least 2 valid options.",
+                                        titleText: Text(
+                                          "Invalid",
+                                          style:
+                                              TextStyle(color: AppTheme.white),
+                                        ),
+                                        messageText: Text(
+                                            "It must has at least 2 valid options.",
+                                            style: TextStyle(
+                                                color: AppTheme.white,
+                                                fontSize: 18)),
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        duration: Duration(seconds: 3));
                                     Navigator.of(context).pop();
+                                    return;
                                   },
                                 ),
                               )

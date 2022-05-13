@@ -112,12 +112,13 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {
+            onTap: () async {
               // Update the state of the app
               // ...
               // Then close the drawer
-              Navigator.pop(context);
-            },
+              main.currentScreen.value = 3;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('screenID', '3');            },
           ),
           ListTile(
             title: Row(
@@ -157,11 +158,10 @@ class MyDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
+            onTap: () async {
+              main.currentScreen.value = 5;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('screenID', '5');
             },
           ),
           Divider(color: AppTheme.nearlyBlack.withOpacity(0.8),),

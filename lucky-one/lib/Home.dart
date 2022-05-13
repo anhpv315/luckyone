@@ -6,7 +6,9 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/MainController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/view/ArrowApp.dart';
 import 'package:lucky_one/view/DiceApp.dart';
+import 'package:lucky_one/view/LuckyNumberApp.dart';
 import 'package:lucky_one/view/WheelApp.dart';
 
 class Home extends GetWidget<MainController> {
@@ -32,19 +34,19 @@ class Home extends GetWidget<MainController> {
         //   // Get.deleteAll();
         //   return LoginPage();
         // }
-        // if (controller.currentScreen.value == 3) {
-        //   // Get.deleteAll();
-        //   return LoginPage();
-        // }
+        if (controller.currentScreen.value == 3) {
+          // Get.deleteAll();
+          return ArrowApp();
+        }
         if (controller.currentScreen.value == 4) {
           print('open wheel');
           // Get.deleteAll();
           return WheelApp();
         }
-        // if (controller.currentScreen.value == 5) {
-        //   // Get.deleteAll();
-        //   return LoginPage();
-        // }
+        if (controller.currentScreen.value == 5) {
+          // Get.deleteAll();
+          return LuckyNumberApp();
+        }
         // if (controller.currentScreen.value == 6) {
         //   // Get.deleteAll();
         //   return LoginPage();
@@ -58,6 +60,8 @@ class Home extends GetWidget<MainController> {
       getPages: [
         GetPage(name: '/dice_app', page: () => DiceApp()),
         GetPage(name: '/wheel_app', page: () => WheelApp()),
+        GetPage(name: '/arrow_app', page: () => ArrowApp()),
+        GetPage(name: '/lucky_number_app', page: () => LuckyNumberApp()),
       ],
     );
   }
