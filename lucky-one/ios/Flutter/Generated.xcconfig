@@ -1,8 +1,8 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=C:\Environment\flutter
-FLUTTER_APPLICATION_PATH=C:\Project\luckyone\lucky-one
+FLUTTER_ROOT=/Users/nova/Data/environment/flutter
+FLUTTER_APPLICATION_PATH=/Users/nova/Data/project/luckyone/lucky-one
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=lib\main.dart
+FLUTTER_TARGET=lib/main.dart
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1

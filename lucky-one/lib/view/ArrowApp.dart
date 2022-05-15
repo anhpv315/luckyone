@@ -67,7 +67,7 @@ class _ArrowAppState extends State<ArrowApp> with TickerProviderStateMixin {
                       Tween(begin: _arrowController.oldDirection.value, end: _arrowController.direction.value).animate(animation),
                   child: Container(
                       height: width * 0.6,
-                      child: Image.asset("assets/images/arrow.png"))),
+                      child: Image.asset("assets/images/arrow2.png"))),
               onTap: () {
                 // oldPosition = _arrowController.direction.value;
                 _arrowController.setRandomDirection();

@@ -156,6 +156,7 @@ class LuckyNumberApp extends StatelessWidget {
                   i++) {
                     _luckyNumberController.listResult.value[i]='';
                   }
+                  _luckyNumberController.listResult.refresh();
                   // await Future.delayed(Duration(milliseconds: 1000));
                   var min = int.parse(_minInputController.text);
                   var max = int.parse(_maxInputController.text);
@@ -164,9 +165,12 @@ class LuckyNumberApp extends StatelessWidget {
                         i < _luckyNumberController.listResult.length;
                         i++) {
                       await Future.delayed(Duration(milliseconds: 500));
-                      _luckyNumberController.listResult.value[i] =
-                          (min + Randomize().randomInRange(max - min))
-                              .toString();
+
+                      var randomNumber = (min + Randomize().randomInRange(max - min)).toString();
+                      while(_luckyNumberController.listResult.value.contains(randomNumber)){
+                        randomNumber = (min + Randomize().randomInRange(max - min)).toString();
+                      }
+                      _luckyNumberController.listResult.value[i] = randomNumber;
                       _luckyNumberController.listResult.refresh();
 
                     }

@@ -100,7 +100,7 @@ class WheelApp extends StatelessWidget {
                 .topCenter, // <-- changing the position of the indicator
             child: TriangleIndicator(
               color: AppTheme
-                  .nearlyWhite, // <-- changing the color of the indicator
+                  .dark_grey, // <-- changing the color of the indicator
             ),
           ),
         ],
@@ -136,7 +136,7 @@ class WheelApp extends StatelessWidget {
                   _wheelController.decrease.value =
                       !_wheelController.decrease.value;
                 },
-                child: Icon(Icons.delete_sweep,
+                child: Icon(Icons.filter_list,
                     color: _wheelController.decrease.value
                         ? AppTheme.nearlyWhite
                         : AppTheme.white)),
@@ -308,7 +308,7 @@ class WheelApp extends StatelessWidget {
               });
         },
         child: Icon(
-          Icons.add,
+          Icons.playlist_add_outlined,
           color: AppTheme.white,
         ),
       ),

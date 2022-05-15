@@ -122,73 +122,201 @@ class MatchListApp extends StatelessWidget {
       //   centerTitle: true,
       //   backgroundColor: Colors.blue,
       // ),
-      body:
-      SingleChildScrollView(
-child:
-      Center(
-          child: Column(
+      body: SingleChildScrollView(
+          child: Center(
+              child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
               Container(
-                width: width / 3,
-                height: height - 30,
-                child: Center(
-                  child: Obx(() => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: _matchListController.leftList.length,
-                    itemBuilder: (context, index) => Container(
-                        decoration: BoxDecoration(
-                          color: AppTheme.white,
-                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(6),topRight: Radius.circular(6),),
-                        ),
-                      padding: EdgeInsets.only(bottom: 10, top: 10, right: 10),
-                      margin: EdgeInsets.only(top: 5, bottom: 5),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                           child: Text(_matchListController.leftList[index], style: TextStyle(fontSize: 16), overflow: TextOverflow.ellipsis,),
-                          )
-                        ))),
-                )
-              ),
+                  width: width / 3,
+                  height: height - 30,
+                  child: Center(
+                    child: Obx(() => ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _matchListController.leftList.length,
+                        itemBuilder: (context, index) => Container(
+                            decoration: BoxDecoration(
+                              color: AppTheme.white,
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(6),
+                                topRight: Radius.circular(6),
+                              ),
+                            ),
+                            padding:
+                                EdgeInsets.only(bottom: 10, top: 10, right: 10),
+                            margin: EdgeInsets.only(top: 5, bottom: 5),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                _matchListController.leftList[index],
+                                style: TextStyle(fontSize: 16),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )))),
+                  )),
               Container(
                   width: width / 3,
                   padding: EdgeInsets.all(30),
                   child: SizedBox(
-                          width: width / 3 - 50,
-                          height: 68,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: AppTheme.nearlyWhite),
-                            onPressed: () {},
-                            child: Icon(
-                              Icons.list,
-                              color: AppTheme.nearlyBlack,
-                              size: 36,
-                            ),
-                          ))),
+                      width: width / 3 - 50,
+                      height: 68,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: AppTheme.nearlyWhite),
+                          onPressed: () {
+                            if (_matchListController.leftList.length < 2 ||
+                                _matchListController.rightList.length < 2) {
+                              return;
+                            }
+                            var left, right = [];
+                            left = new List<String>.from(_matchListController.leftList.value);
+                            right = new List<String>.from(_matchListController.rightList.value);
+                            if (left.length > right.length) {
+                              for(var i = right.length; i < left.length; i++){
+                                right.add('');
+                              }
+                            } else if(left.length < right.length) {
+                              for(var i = left.length; i < right.length; i++){
+                                left.add('');
+                              }                            }
+
+                            _matchListController.listResult.length = 0;
+                            for (var i = 0; i < left.length; i++) {
+                              var random = Randomize().randomInRange(right.length);
+                              var str = (left[i] == ''? '*': left[i]) + ' - '+ (right[random] ==''? '*': right[random]);
+                              right.removeAt(random);
+
+                              _matchListController.listResult.value.add(str);
+                            }
+
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: Colors.grey.withOpacity(0.4),
+
+                                    content: SingleChildScrollView(
+                                      child:
+                                          Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Container(
+                                              width: width - 60,
+                                              height: height - 200,
+                                              child: Center(
+                                                child: Obx(() => ListView.builder(
+                                                    shrinkWrap: true,
+                                                    itemCount: _matchListController.listResult.length,
+                                                    itemBuilder: (context, index) => Container(
+                                                        decoration: BoxDecoration(
+                                                          color: AppTheme.white,
+                                                          borderRadius: BorderRadius.all(Radius.circular(6))
+                                                        ),
+                                                        padding:
+                                                        EdgeInsets.only(bottom: 10, top: 10, right: 10),
+                                                        margin: EdgeInsets.only(top: 5, bottom: 5),
+                                                        child: Align(
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                            _matchListController.listResult[index],
+                                                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                                            overflow: TextOverflow.ellipsis,
+                                                          ),
+                                                        )))),
+                                              )),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(8.0),
+                                                child: RaisedButton(
+                                                  child: Icon(Icons.refresh, color: AppTheme.nearlyWhite,),
+                                                  color: AppTheme.nearlyBlack,
+                                                  onPressed: () {
+                                                    if (_matchListController.leftList.length < 2 ||
+                                                        _matchListController.rightList.length < 2) {
+                                                      return;
+                                                    }
+                                                    var left, right = [];
+                                                    left = new List<String>.from(_matchListController.leftList.value);
+                                                    right = new List<String>.from(_matchListController.rightList.value);
+                                                    if (left.length > right.length) {
+                                                      for(var i = right.length; i < left.length; i++){
+                                                        right.add('');
+                                                      }
+                                                    } else if(left.length < right.length) {
+                                                      for(var i = left.length; i < right.length; i++){
+                                                        left.add('');
+                                                      }                            }
+
+                                                    _matchListController.listResult.length = 0;
+                                                    for (var i = 0; i < left.length; i++) {
+                                                      var random = Randomize().randomInRange(right.length);
+                                                      var str = (left[i] == ''? '*': left[i]) + ' - '+ (right[random] ==''? '*': right[random]);
+                                                      right.removeAt(random);
+
+                                                      _matchListController.listResult.value.add(str);
+                                                    }
+                                                    _matchListController.listResult.refresh();
+                                                  },
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: RaisedButton(
+                                                  child: Text("Close",
+                                                      style: TextStyle(
+                                                          color:
+                                                              AppTheme.white)),
+                                                  color: AppTheme.nearlyWhite,
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ),
+
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Image.asset("assets/icons/merge.png")))),
               Container(
-                width: width / 3,
-                height: height - 30,
-                decoration: BoxDecoration(
-                  // border: Border.all(color: AppTheme.white, width: 1),
-                ),
-                child: Center(
-                  child: Obx(() => ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _matchListController.rightList.length,
-                      itemBuilder: (context, index) => Container(
-                        decoration: BoxDecoration(
-                          color: AppTheme.white,
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6),topLeft: Radius.circular(6),),
-                        ),
-                        padding: EdgeInsets.only(bottom: 10, top: 10, left: 10),
-                        margin: EdgeInsets.only(top: 5, bottom: 5),
-                        child: Text(_matchListController.rightList[index], style: TextStyle(fontSize: 16), overflow: TextOverflow.ellipsis,),
-                      ))),
-                )
-              ),
+                  width: width / 3,
+                  height: height - 30,
+                  decoration: BoxDecoration(
+                      // border: Border.all(color: AppTheme.white, width: 1),
+                      ),
+                  child: Center(
+                    child: Obx(() => ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _matchListController.rightList.length,
+                        itemBuilder: (context, index) => Container(
+                              decoration: BoxDecoration(
+                                color: AppTheme.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(6),
+                                  topLeft: Radius.circular(6),
+                                ),
+                              ),
+                              padding: EdgeInsets.only(
+                                  bottom: 10, top: 10, left: 10),
+                              margin: EdgeInsets.only(top: 5, bottom: 5),
+                              child: Text(
+                                _matchListController.rightList[index],
+                                style: TextStyle(fontSize: 16),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ))),
+                  )),
             ],
           )
         ],
@@ -200,226 +328,214 @@ child:
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  content:
-
-                    SingleChildScrollView(
-
+                  content: SingleChildScrollView(
                     child:
-                      // Positioned(
-                      //   right: -40.0,
-                      //   top: -40.0,
-                      //   child: InkResponse(
-                      //     onTap: () {
-                      //       Navigator.of(context).pop();
-                      //     },
-                      //     child: CircleAvatar(
-                      //       child: Icon(Icons.close),
-                      //       backgroundColor: Colors.red,
-                      //     ),
-                      //   ),
-                      // ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Enter your list,',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16),
-                                  ),
-                                  Text(
-                                    'separate by a comma ","!',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'Example: "banana, strawberry, apple"',
-                                    style: TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 14),
-                                  ),
-                                ],
-                              )),
-                          Padding(
+                        // Positioned(
+                        //   right: -40.0,
+                        //   top: -40.0,
+                        //   child: InkResponse(
+                        //     onTap: () {
+                        //       Navigator.of(context).pop();
+                        //     },
+                        //     child: CircleAvatar(
+                        //       child: Icon(Icons.close),
+                        //       backgroundColor: Colors.red,
+                        //     ),
+                        //   ),
+                        // ),
+                        Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: _inputLeftController,
-                              decoration: InputDecoration(
-                                  fillColor:
-                                      AppTheme.dark_grey.withOpacity(0.1),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    borderSide: BorderSide(
-                                      color:
-                                          AppTheme.dark_grey.withOpacity(0.8),
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    borderSide: BorderSide(
-                                      color:
-                                          AppTheme.dark_grey.withOpacity(0.3),
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  labelText: "Left list",
-                                  labelStyle: TextStyle(
-                                      color:
-                                          AppTheme.dark_grey.withOpacity(0.8)),
-                                  filled: true,
-                                  isDense: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  )),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: TextField(
-                              controller: _inputRightController,
-                              decoration: InputDecoration(
-                                  fillColor:
-                                      AppTheme.dark_grey.withOpacity(0.1),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    borderSide: BorderSide(
-                                      color:
-                                          AppTheme.dark_grey.withOpacity(0.8),
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    borderSide: BorderSide(
-                                      color:
-                                          AppTheme.dark_grey.withOpacity(0.3),
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  labelText: "Right list",
-                                  labelStyle: TextStyle(
-                                      color:
-                                          AppTheme.dark_grey.withOpacity(0.8)),
-                                  filled: true,
-                                  isDense: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  )),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: RaisedButton(
-                                  child: Text("Close",
-                                      style: TextStyle(color: AppTheme.white)),
-                                  color: AppTheme.nearlyWhite,
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Enter your list,',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
                                 ),
+                                Text(
+                                  'separate by a comma ","!',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'Example: "banana, strawberry, apple"',
+                                  style: TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 14),
+                                ),
+                              ],
+                            )),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: _inputLeftController,
+                            decoration: InputDecoration(
+                                fillColor: AppTheme.dark_grey.withOpacity(0.1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.dark_grey.withOpacity(0.8),
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.dark_grey.withOpacity(0.3),
+                                    width: 2.0,
+                                  ),
+                                ),
+                                labelText: "Left list",
+                                labelStyle: TextStyle(
+                                    color: AppTheme.dark_grey.withOpacity(0.8)),
+                                filled: true,
+                                isDense: true,
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                )),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: _inputRightController,
+                            decoration: InputDecoration(
+                                fillColor: AppTheme.dark_grey.withOpacity(0.1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.dark_grey.withOpacity(0.8),
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.dark_grey.withOpacity(0.3),
+                                    width: 2.0,
+                                  ),
+                                ),
+                                labelText: "Right list",
+                                labelStyle: TextStyle(
+                                    color: AppTheme.dark_grey.withOpacity(0.8)),
+                                filled: true,
+                                isDense: true,
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                )),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                child: Text("Close",
+                                    style: TextStyle(color: AppTheme.white)),
+                                color: AppTheme.nearlyWhite,
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: RaisedButton(
-                                  child: Text(
-                                    "Done",
-                                    style:
-                                        TextStyle(color: AppTheme.nearlyWhite),
-                                  ),
-                                  color: AppTheme.nearlyBlack,
-                                  onPressed: () {
-                                    // print(_inputController.text);
-                                    var _leftOK = false;
-                                    var arr = _inputLeftController.text.split(',');
-                                    var invalidArr = [];
-                                    if (arr.length > 1) {
-                                      for (var i = 0; i < arr.length; i++) {
-                                        arr[i] = arr[i].trim();
-                                        if (arr[i].isEmpty) {
-                                          invalidArr.add(i);
-                                        }
-                                      }
-                                      if (invalidArr.isNotEmpty) {
-                                        for (var i = 0;
-                                            i < invalidArr.length;
-                                            i++) {
-                                          arr.removeAt(invalidArr[i]);
-                                        }
-                                      }
-                                      if (arr.length > 1) {
-                                        _matchListController.newLeftList(arr);
-                                        _matchListController.leftList.refresh();
-                                        _leftOK = true;
-                                      }
-                                    }
-
-
-                                    var _rightOK = false;
-                                    arr = _inputRightController.text.split(',');
-                                    invalidArr = [];
-                                    if (arr.length > 1) {
-                                      for (var i = 0; i < arr.length; i++) {
-                                        arr[i] = arr[i].trim();
-                                        if (arr[i].isEmpty) {
-                                          invalidArr.add(i);
-                                        }
-                                      }
-                                      if (invalidArr.isNotEmpty) {
-                                        for (var i = 0;
-                                        i < invalidArr.length;
-                                        i++) {
-                                          arr.removeAt(invalidArr[i]);
-                                        }
-                                      }
-                                      if (arr.length > 1) {
-                                        _matchListController.newRightList(arr);
-                                        _matchListController.rightList.refresh();
-                                        _rightOK = true;
-                                      }
-                                    }
-
-                                    if(!_leftOK || !_rightOK){
-                                      Get.snackbar("Invalid",
-                                          "It must has at least 2 valid options.",
-                                          titleText: Text(
-                                            "Invalid",
-                                            style:
-                                                TextStyle(color: AppTheme.white),
-                                          ),
-                                          messageText: Text(
-                                              "Each list must has at least 2 valid options.",
-                                              style: TextStyle(
-                                                  color: AppTheme.white,
-                                                  fontSize: 18)),
-                                          snackPosition: SnackPosition.BOTTOM,
-                                          duration: Duration(seconds: 3));
-                                    }
-                                    Navigator.of(context).pop();
-                                  },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RaisedButton(
+                                child: Text(
+                                  "Done",
+                                  style: TextStyle(color: AppTheme.nearlyWhite),
                                 ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                                color: AppTheme.nearlyBlack,
+                                onPressed: () {
+                                  // print(_inputController.text);
+                                  var _leftOK = false;
+                                  var arr =
+                                      _inputLeftController.text.split(',');
+                                  var invalidArr = [];
+                                  if (arr.length > 1) {
+                                    for (var i = 0; i < arr.length; i++) {
+                                      arr[i] = arr[i].trim();
+                                      if (arr[i].isEmpty) {
+                                        invalidArr.add(i);
+                                      }
+                                    }
+                                    if (invalidArr.isNotEmpty) {
+                                      for (var i = 0;
+                                          i < invalidArr.length;
+                                          i++) {
+                                        arr.removeAt(invalidArr[i]);
+                                      }
+                                    }
+                                    if (arr.length > 1) {
+                                      _matchListController.newLeftList(arr);
+                                      _matchListController.leftList.refresh();
+                                      _leftOK = true;
+                                    }
+                                  }
+
+                                  var _rightOK = false;
+                                  arr = _inputRightController.text.split(',');
+                                  invalidArr = [];
+                                  if (arr.length > 1) {
+                                    for (var i = 0; i < arr.length; i++) {
+                                      arr[i] = arr[i].trim();
+                                      if (arr[i].isEmpty) {
+                                        invalidArr.add(i);
+                                      }
+                                    }
+                                    if (invalidArr.isNotEmpty) {
+                                      for (var i = 0;
+                                          i < invalidArr.length;
+                                          i++) {
+                                        arr.removeAt(invalidArr[i]);
+                                      }
+                                    }
+                                    if (arr.length > 1) {
+                                      _matchListController.newRightList(arr);
+                                      _matchListController.rightList.refresh();
+                                      _rightOK = true;
+                                    }
+                                  }
+
+                                  if (!_leftOK || !_rightOK) {
+                                    Get.snackbar("Invalid",
+                                        "It must has at least 2 valid options.",
+                                        titleText: Text(
+                                          "Invalid",
+                                          style:
+                                              TextStyle(color: AppTheme.white),
+                                        ),
+                                        messageText: Text(
+                                            "Each list must has at least 2 valid options.",
+                                            style: TextStyle(
+                                                color: AppTheme.white,
+                                                fontSize: 18)),
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        duration: Duration(seconds: 3));
+                                  }
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 );
               });
         },
         child: Icon(
-          Icons.add,
+          Icons.list,
           color: AppTheme.white,
         ),
       ),

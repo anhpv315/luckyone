@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class MatchListController extends GetxController {
-  var listItems = [].obs;
+  var listResult = [].obs;
   var rolling = false.obs;
   var leftList = ['1', '2'].obs;
   var rightList = ['a', 'b'].obs;

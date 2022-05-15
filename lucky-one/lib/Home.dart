@@ -8,8 +8,10 @@ import 'package:lucky_one/controller/MainController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
 import 'package:lucky_one/view/ArrowApp.dart';
 import 'package:lucky_one/view/DiceApp.dart';
+import 'package:lucky_one/view/DrawCardApp.dart';
 import 'package:lucky_one/view/LuckyNumberApp.dart';
 import 'package:lucky_one/view/MatchListApp.dart';
+import 'package:lucky_one/view/ThreeCardsApp.dart';
 import 'package:lucky_one/view/WheelApp.dart';
 
 class Home extends GetWidget<MainController> {
@@ -27,14 +29,14 @@ class Home extends GetWidget<MainController> {
       home: Scaffold(
           backgroundColor: AppTheme.dark_grey.withOpacity(0),
           body: SafeArea(child: Obx(() {
-        // if (controller.currentScreen.value == 1) {
-        //   // Get.deleteAll();
-        //   return DiceApp();
-        // }
-        // if (controller.currentScreen.value == 2) {
-        //   // Get.deleteAll();
-        //   return LoginPage();
-        // }
+        if (controller.currentScreen.value == 1) {
+          // Get.deleteAll();
+          return DrawCardApp();
+        }
+        if (controller.currentScreen.value == 2) {
+          // Get.deleteAll();
+          return ThreeCardsApp();
+        }
         if (controller.currentScreen.value == 3) {
           // Get.deleteAll();
           return ArrowApp();
@@ -51,6 +53,10 @@ class Home extends GetWidget<MainController> {
           // Get.deleteAll();
           return MatchListApp();
         }
+        // if (controller.currentScreen.value == 7) {
+        //   // Get.deleteAll();
+        //   return MatchListApp();
+        // }
         return DiceApp();
       }))),
       getPages: [
@@ -59,6 +65,8 @@ class Home extends GetWidget<MainController> {
         GetPage(name: '/arrow_app', page: () => ArrowApp()),
         GetPage(name: '/lucky_number_app', page: () => LuckyNumberApp()),
         GetPage(name: '/match_list_app', page: () => MatchListApp()),
+        GetPage(name: '/draw_card_app', page: () => DrawCardApp()),
+        GetPage(name: '/three_cards_app', page: () => ThreeCardsApp()),
       ],
     );
   }
