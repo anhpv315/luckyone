@@ -6,7 +6,7 @@ class DiceController extends GetxController {
   var listResult =  List<int>.empty().obs;
 
   addDice() {
-      if(listDiceFaces.length >= 4){
+      if(listDiceFaces.length >= 3){
         listDiceFaces.length = 0;
         listDiceFaces.add(6);
         return;
