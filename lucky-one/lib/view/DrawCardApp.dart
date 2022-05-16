@@ -134,7 +134,7 @@ class DrawCardApp extends StatelessWidget {
               child:
               AnimatedOpacity(
                 opacity:  _drawCardController.cards.value[i] == 'remove'? 0.0: 1.0,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 200),
                 child:
                 Container(
                   width: width * 0.5,
