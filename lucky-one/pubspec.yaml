@@ -38,6 +38,7 @@ dependencies:
   shake_event: ^0.0.9
   shared_preferences: ^2.0.13
   flutter_fortune_wheel: ^1.2.0
+  flip_card: ^0.6.0
 
 
 dev_dependencies:

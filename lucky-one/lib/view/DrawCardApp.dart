@@ -104,52 +104,57 @@ class DrawCardApp extends StatelessWidget {
     ));
     for (var i = 0; i < list.length; i++) {
       list1.add(
-        Positioned(
-            top: i * 60,
-            right: 0,
+        AnimatedPositioned(
+            top: i * _drawCardController.vertical.value.toDouble(),
+            // right: 0 - (_drawCardController.cards.value[i] == 'remove'? 40: 0),
+            right: 40 - (_drawCardController.listDistances.value[i] != null?_drawCardController.listDistances.value[i] : 0),
+            duration: Duration(milliseconds: 300),
             child: GestureDetector(
               onTap: () async {
-                if(_drawCardController.drawing.value){
+                if(_drawCardController.drawing.value || _drawCardController.cards[i] == 'remove'){
                   return;
                 }
-                print(list[i]);
+                // print(list[i]);
                 _drawCardController.drawing.value = true;
-                _drawCardController.selected.value = list[i];
-                _drawCardController.saveCards(list[i]);
-                _drawCardController.cards[i] = 'remove';
-                await Future.delayed(Duration(milliseconds: 450));
-                _drawCardController.cards.removeAt(i);
-                _drawCardController.cards.refresh();
-                print(_drawCardController.cards.length);
+                // _drawCardController.selected.value = list[i];
+                // _drawCardController.cards.value[i] = 'remove';
+                print('save history');
+
+                await _drawCardController.updateCard(i, 'remove');
+                print('remove card');
+
+                // _drawCardController.cards.refresh();
+
+                // _drawCardController.cards.removeAt(i);
+                // _drawCardController.listMoveDistance.removeAt(i);
                 _drawCardController.drawing.value = false;
+
 
               },
               child:
               AnimatedOpacity(
-                // If the widget is visible, animate to 0.0 (invisible).
-                // If the widget is hidden, animate to 1.0 (fully visible).
                 opacity:  _drawCardController.cards.value[i] == 'remove'? 0.0: 1.0,
-                duration: const Duration(milliseconds: 400),
-                // The green box must be a child of the AnimatedOpacity widget.
-                child: Container(
+                duration: const Duration(milliseconds: 300),
+                child:
+                Container(
                   width: width * 0.5,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withOpacity(0.1),
                         spreadRadius: 1,
-                        blurRadius: 10,
-                        offset: Offset(2, -4), // changes position of shadow
+                        blurRadius: 1,
+                        offset: Offset(0, -2), // changes position of shadow
                       ),
                     ],
                   ),
                   // color: Colors.red,
-                  child: Image.asset('assets/images/cards/back3.png',
-                      fit: BoxFit.cover),
+                  child: _drawCardController.cards.value[i] != 'remove'? Image.asset('assets/images/cards/back3.png',
+                      fit: BoxFit.cover): Container(),
                 ),
               ),
-
-            )),
+            )
+        ),
       );
     }
     return
@@ -185,7 +190,7 @@ class DrawCardApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    width: width * 0.4,
+                    width: width * 0.5,
                     height: height - 80,
                     child: Obx(
                           () =>
@@ -197,18 +202,13 @@ class DrawCardApp extends StatelessWidget {
                    child: Obx(
                            () => Row(
                     children: [
-                      Text(_drawCardController.cards.length.toString(), style: TextStyle(fontSize: 18, color: AppTheme.white, fontWeight: FontWeight.w500),),
+                      Text(_drawCardController.cards.value.where((c) => c != 'remove').toList().length.toString(), style: TextStyle(fontSize: 18, color: AppTheme.white, fontWeight: FontWeight.w500),),
                       Image.asset('assets/images/3cards.png',height: 20,)
                     ],
                   )))
                 ],
               ),
 
-              Container(
-                width: width * 0.1,
-                // color: Colors.red,
-                padding: EdgeInsets.all(30),
-              ),
               Container(
                 width: width * 0.5,
                 height: height - 30,
