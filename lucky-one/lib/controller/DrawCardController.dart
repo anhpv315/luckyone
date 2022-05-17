@@ -52,7 +52,7 @@ class DrawCardController extends GetxController {
 
     listDistances.value[index] = 40;
     listDistances.refresh();
-    await Future.delayed(Duration(milliseconds: 300));
+    await Future.delayed(Duration(milliseconds: 200));
     cards.value[index] = value;
     cards.refresh();
     await Future.delayed(Duration(milliseconds: 200));

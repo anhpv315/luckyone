@@ -39,6 +39,9 @@ dependencies:
   shared_preferences: ^2.0.13
   flutter_fortune_wheel: ^1.2.0
   flip_card: ^0.6.0
+  animated_text_kit: ^4.2.1
+  audioplayers: ^0.20.1
+  path_provider: ^2.0.10
 
 
 dev_dependencies:
@@ -68,6 +71,7 @@ flutter:
     - assets/images/
     - assets/images/cards/
     - assets/icons/
+    - assets/audio/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -92,6 +96,15 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+  fonts:
+    - family: Courier
+      fonts:
+        - asset: assets/font/Courier Regular.ttf
+    - family: texgyrecursor
+      fonts:
+        - asset: assets/font/texgyrecursor-bold.otf
+        - asset: assets/font/texgyrecursor-bolditalic.otf
+        - asset: assets/font/texgyrecursor-italic.otf
+        - asset: assets/font/texgyrecursor-regular.otf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -108,7 +108,7 @@ class DrawCardApp extends StatelessWidget {
             top: i * _drawCardController.vertical.value.toDouble(),
             // right: 0 - (_drawCardController.cards.value[i] == 'remove'? 40: 0),
             right: 40 - (_drawCardController.listDistances.value[i] != null?_drawCardController.listDistances.value[i] : 0),
-            duration: Duration(milliseconds: 300),
+            duration: Duration(milliseconds: 200),
             child: GestureDetector(
               onTap: () async {
                 if(_drawCardController.drawing.value || _drawCardController.cards[i] == 'remove'){

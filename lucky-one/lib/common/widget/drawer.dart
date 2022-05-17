@@ -20,19 +20,25 @@ class MyDrawer extends StatelessWidget {
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
-              SizedBox(
-                height: 120,
-                child: DrawerHeader(
-                  decoration: BoxDecoration(color: AppTheme.nearlyBlack),
-                  child: Center(
-                      child: Text(
-                    'LUCKY ONE',
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.nearlyWhite),
-                  )),
-                ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // SizedBox(
+              //   height: 120,
+              //   child: DrawerHeader(
+              //     decoration: BoxDecoration(color: AppTheme.nearlyBlack),
+              //     child: Center(
+              //         child: Text(
+              //       'LUCKY ONE',
+              //       style: TextStyle(
+              //           fontSize: 32,
+              //           fontWeight: FontWeight.w700,
+              //           color: AppTheme.nearlyWhite),
+              //     )),
+              //   ),
+              // ),
+              Divider(
+                color: AppTheme.nearlyBlack.withOpacity(0.8),
               ),
               ListTile(
                 title: Row(

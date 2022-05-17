@@ -13,6 +13,7 @@ import 'package:lucky_one/view/LuckyNumberApp.dart';
 import 'package:lucky_one/view/MatchListApp.dart';
 import 'package:lucky_one/view/ThreeCardsApp.dart';
 import 'package:lucky_one/view/WheelApp.dart';
+import 'package:lucky_one/view/splash_screen.dart';
 
 class Home extends GetWidget<MainController> {
   //all function or variables of main.dart will be here
@@ -29,6 +30,7 @@ class Home extends GetWidget<MainController> {
       home: Scaffold(
           backgroundColor: AppTheme.dark_grey.withOpacity(0),
           body: SafeArea(child: Obx(() {
+
         if (controller.currentScreen.value == 1) {
           // Get.deleteAll();
           return DrawCardApp();
@@ -57,6 +59,10 @@ class Home extends GetWidget<MainController> {
         //   // Get.deleteAll();
         //   return MatchListApp();
         // }
+        if (controller.currentScreen.value == -1) {
+          // Get.deleteAll();
+          return SplashScreen();
+        }
         return DiceApp();
       }))),
       getPages: [
