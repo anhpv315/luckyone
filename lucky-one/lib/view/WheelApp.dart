@@ -69,6 +69,7 @@ class WheelApp extends StatelessWidget {
       width: width * 0.8,
       child: FortuneWheel(
         animateFirst: false,
+        duration: Duration(seconds: 10),
         selected: selected.stream,
         items: list1,
         onAnimationStart: () {
@@ -127,19 +128,22 @@ class WheelApp extends StatelessWidget {
         children: [
           Container(
               child: Obx(
-            () => ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: _wheelController.decrease.value
-                        ? AppTheme.nearlyBlack
-                        : AppTheme.nearlyWhite),
-                onPressed: () {
-                  _wheelController.decrease.value =
-                      !_wheelController.decrease.value;
-                },
-                child: Icon(Icons.filter_list,
-                    color: _wheelController.decrease.value
-                        ? AppTheme.nearlyWhite
-                        : AppTheme.white)),
+            () => Container(
+              padding: EdgeInsets.only(top: 40),
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: _wheelController.decrease.value
+                      ? AppTheme.nearlyBlack
+                      : AppTheme.nearlyWhite),
+              onPressed: () {
+                _wheelController.decrease.value =
+                !_wheelController.decrease.value;
+              },
+              child: Icon(Icons.filter_list,
+                  color: _wheelController.decrease.value
+                      ? AppTheme.nearlyWhite
+                      : AppTheme.white)),
+      )
           )),
           Expanded(
             child: Obx(() =>

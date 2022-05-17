@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -22,13 +23,17 @@ class Home extends GetWidget<MainController> {
   Widget build(BuildContext context) {
     var title = 'Lucky One';
     var screenID = controller.currentScreen.value;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppTheme.nearlyBlack
+    ));
+
     return GetMaterialApp(
       title: title,
       debugShowCheckedModeBanner: false,
       // initialRoute: contactView,
       home: Scaffold(
-          backgroundColor: AppTheme.dark_grey.withOpacity(0),
-          body: SafeArea(child: Obx(() {
+          backgroundColor: AppTheme.nearlyBlack,
+          body: Container(child: Obx(() {
         if (controller.currentScreen.value == 1) {
           // Get.deleteAll();
           return DrawCardApp();
