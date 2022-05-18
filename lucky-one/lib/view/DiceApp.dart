@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:lucky_one/common/widget/drawer.dart';
-import 'package:lucky_one/controller/DiceController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
-import 'package:lucky_one/ulti/Audio.dart';
-import 'package:lucky_one/ulti/Randomize.dart';
+import 'package:LuckyOne/common/widget/drawer.dart';
+import 'package:LuckyOne/controller/DiceController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
+import 'package:LuckyOne/ulti/Audio.dart';
+import 'package:LuckyOne/ulti/Randomize.dart';
 import 'package:shake_event/shake_event.dart';
 
 class DiceApp extends StatelessWidget {

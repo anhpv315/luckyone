@@ -1,7 +1,7 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/ulti/Constant.dart';
+import 'package:LuckyOne/ulti/Constant.dart';
 
 class ThreeCardsController extends GetxController {
 

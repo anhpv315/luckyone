@@ -1,4 +1,4 @@
-# lucky_one
+# LuckyOne
 
 A new Flutter project.
 

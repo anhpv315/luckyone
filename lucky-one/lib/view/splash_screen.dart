@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/controller/MainController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:LuckyOne/controller/MainController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -22,14 +22,14 @@ class SplashScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 60),
+                  margin: EdgeInsets.only(top: 100),
                   width: width * 0.6,
                   child: Image.asset('assets/images/logo.png'),
                 ),
                 Container(
                   // color: Colors.red,
                   height: 300,
-                  padding: EdgeInsets.all(60),
+                  padding: EdgeInsets.only(left: 60, right: 60, bottom: 100),
                     child:
 
                     Align(

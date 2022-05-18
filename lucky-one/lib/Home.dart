@@ -4,17 +4,17 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:lucky_one/common/widget/drawer.dart';
-import 'package:lucky_one/controller/MainController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
-import 'package:lucky_one/view/ArrowApp.dart';
-import 'package:lucky_one/view/DiceApp.dart';
-import 'package:lucky_one/view/DrawCardApp.dart';
-import 'package:lucky_one/view/LuckyNumberApp.dart';
-import 'package:lucky_one/view/MatchListApp.dart';
-import 'package:lucky_one/view/ThreeCardsApp.dart';
-import 'package:lucky_one/view/WheelApp.dart';
-import 'package:lucky_one/view/splash_screen.dart';
+import 'package:LuckyOne/common/widget/drawer.dart';
+import 'package:LuckyOne/controller/MainController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
+import 'package:LuckyOne/view/ArrowApp.dart';
+import 'package:LuckyOne/view/DiceApp.dart';
+import 'package:LuckyOne/view/DrawCardApp.dart';
+import 'package:LuckyOne/view/LuckyNumberApp.dart';
+import 'package:LuckyOne/view/MatchListApp.dart';
+import 'package:LuckyOne/view/ThreeCardsApp.dart';
+import 'package:LuckyOne/view/WheelApp.dart';
+import 'package:LuckyOne/view/splash_screen.dart';
 
 class Home extends GetWidget<MainController> {
   //all function or variables of main.dart will be here

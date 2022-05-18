@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/common/widget/drawer.dart';
-import 'package:lucky_one/controller/MatchListController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
-import 'package:lucky_one/ulti/Audio.dart';
-import 'package:lucky_one/ulti/Randomize.dart';
+import 'package:LuckyOne/common/widget/drawer.dart';
+import 'package:LuckyOne/controller/MatchListController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
+import 'package:LuckyOne/ulti/Audio.dart';
+import 'package:LuckyOne/ulti/Randomize.dart';
 import 'package:flutter/material.dart';
 
 class MatchListApp extends StatelessWidget {
@@ -205,35 +205,38 @@ class MatchListApp extends StatelessWidget {
                                       return AlertDialog(
                                         backgroundColor: Colors.grey.withOpacity(0.4),
 
-                                        content: SingleChildScrollView(
+                                        content: Container(
                                           child:
                                           Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
-                                              Container(
-                                                  width: width - 60,
-                                                  height: height - 200,
-                                                  child: Center(
-                                                    child: Obx(() => ListView.builder(
-                                                        shrinkWrap: true,
-                                                        itemCount: _matchListController.listResult.length,
-                                                        itemBuilder: (context, index) => Container(
-                                                            decoration: BoxDecoration(
-                                                                color: AppTheme.white,
-                                                                borderRadius: BorderRadius.all(Radius.circular(6))
-                                                            ),
-                                                            padding:
-                                                            EdgeInsets.only(bottom: 10, top: 10, right: 10),
-                                                            margin: EdgeInsets.only(top: 5, bottom: 5),
-                                                            child: Align(
-                                                              alignment: Alignment.center,
-                                                              child: Text(
-                                                                _matchListController.listResult[index],
-                                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                                                                overflow: TextOverflow.ellipsis,
+                                              SingleChildScrollView(
+                                                child: Container(
+                                                  // color: Colors.red,
+                                                    height: height - 250,
+                                                    width: width - 60,
+                                                    child: Center(
+                                                      child: Obx(() => ListView.builder(
+                                                          shrinkWrap: true,
+                                                          itemCount: _matchListController.listResult.length,
+                                                          itemBuilder: (context, index) => Container(
+                                                              decoration: BoxDecoration(
+                                                                  color: AppTheme.white,
+                                                                  borderRadius: BorderRadius.all(Radius.circular(6))
                                                               ),
-                                                            )))),
-                                                  )),
+                                                              padding:
+                                                              EdgeInsets.only(bottom: 10, top: 10, right: 10),
+                                                              margin: EdgeInsets.only(top: 5, bottom: 5),
+                                                              child: Align(
+                                                                alignment: Alignment.center,
+                                                                child: Text(
+                                                                  _matchListController.listResult[index],
+                                                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                                                  overflow: TextOverflow.ellipsis,
+                                                                ),
+                                                              )))),
+                                                    )),
+                                              ),
                                               Row(
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -546,7 +549,7 @@ class MatchListApp extends StatelessWidget {
         },
         child: Icon(
           Icons.list,
-          color: AppTheme.nearlyBlack,
+          color: AppTheme.white,
         ),
       ),
     );

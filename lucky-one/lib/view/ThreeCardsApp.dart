@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:lucky_one/common/widget/drawer.dart';
-import 'package:lucky_one/controller/ThreeCardsController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
-import 'package:lucky_one/ulti/Randomize.dart';
+import 'package:LuckyOne/common/widget/drawer.dart';
+import 'package:LuckyOne/controller/ThreeCardsController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
+import 'package:LuckyOne/ulti/Randomize.dart';
 
 import '../ulti/Audio.dart';
 

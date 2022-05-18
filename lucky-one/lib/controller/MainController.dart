@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/ulti/Audio.dart';
+import 'package:LuckyOne/ulti/Audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -18,7 +18,7 @@ class MainController extends GetxController {
     currentScreen.value = -1;
     audio = new Audio(audioPath);
     // audio.playLocal();
-    await Future.delayed(Duration(seconds: 8));
+    await Future.delayed(Duration(seconds: 9));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     currentScreen.value = prefs.getString('screenID') != null

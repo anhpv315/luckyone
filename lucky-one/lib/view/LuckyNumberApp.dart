@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/common/widget/drawer.dart';
-import 'package:lucky_one/controller/LuckyNumberController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
-import 'package:lucky_one/ulti/Audio.dart';
-import 'package:lucky_one/ulti/Randomize.dart';
+import 'package:LuckyOne/common/widget/drawer.dart';
+import 'package:LuckyOne/controller/LuckyNumberController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
+import 'package:LuckyOne/ulti/Audio.dart';
+import 'package:LuckyOne/ulti/Randomize.dart';
 
 class LuckyNumberApp extends StatelessWidget {
   //all function or variables of main.dart will be here

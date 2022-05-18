@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:lucky_one/ulti/Audio.dart';
-import 'package:lucky_one/ulti/Constant.dart';
+import 'package:LuckyOne/ulti/Audio.dart';
+import 'package:LuckyOne/ulti/Constant.dart';
 
 class DrawCardController extends GetxController {
   var selected = ''.obs;

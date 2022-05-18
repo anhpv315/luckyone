@@ -1,6 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/ulti/Randomize.dart';
+import 'package:LuckyOne/ulti/Randomize.dart';
 
 class ArrowController extends GetxController with SingleGetTickerProviderMixin {
   var spinning = false.obs;

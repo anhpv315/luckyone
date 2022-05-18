@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lucky_one/controller/MainController.dart';
-import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:LuckyOne/controller/MainController.dart';
+import 'package:LuckyOne/ulti/AppTheme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -223,31 +223,31 @@ class MyDrawer extends StatelessWidget {
                   prefs.setString('screenID', '6');
                 },
               ),
-              Divider(
-                color: AppTheme.nearlyBlack.withOpacity(0.8),
-              ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Tab(
-                      icon: new Image.asset("assets/icons/donate.png"),
-                      height: 30,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      'Share your luck!',
-                      style:
-                          TextStyle(fontSize: 18, color: AppTheme.nearlyBlack),
-                    ),
-                  ],
-                ),
-                onTap: () async {
-                  // main.currentScreen.value = 0;
-                  // SharedPreferences prefs =
-                  //     await SharedPreferences.getInstance();
-                  // prefs.setString('screenID', '0');
-                },
-              ),
+              // Divider(
+              //   color: AppTheme.nearlyBlack.withOpacity(0.8),
+              // ),
+              // ListTile(
+              //   title: Row(
+              //     children: [
+              //       Tab(
+              //         icon: new Image.asset("assets/icons/donate.png"),
+              //         height: 30,
+              //       ),
+              //       SizedBox(width: 10),
+              //       Text(
+              //         'Share your luck!',
+              //         style:
+              //             TextStyle(fontSize: 18, color: AppTheme.nearlyBlack),
+              //       ),
+              //     ],
+              //   ),
+              //   onTap: () async {
+              //     // main.currentScreen.value = 0;
+              //     // SharedPreferences prefs =
+              //     //     await SharedPreferences.getInstance();
+              //     // prefs.setString('screenID', '0');
+              //   },
+              // ),
             ],
           ),
         ));
