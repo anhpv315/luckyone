@@ -10,6 +10,8 @@ import 'package:lucky_one/controller/ThreeCardsController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 
+import '../ulti/Audio.dart';
+
 class ThreeCardsApp extends StatefulWidget {
   ThreeCardsApp({Key? key}) : super(key: key);
 
@@ -23,6 +25,8 @@ class _ThreeCardsAppState extends State<ThreeCardsApp>
 
   final ThreeCardsController _threeCardsController =
       Get.put(ThreeCardsController());
+  String chiaBaiMp3Path = 'audio/chia6labai.mp3';
+  String latBaiMp3Path = 'audio/chiabai.mp3';
 
 
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
@@ -96,6 +100,8 @@ class _ThreeCardsAppState extends State<ThreeCardsApp>
                                         //     AnimationStatus.dismissed) {
                                         //   listAnimationControllerTop[i].forward();
                                         // }
+                                        Audio audio = new Audio(latBaiMp3Path);
+                                        audio.playLocal();
                                         _threeCardsController.listKey1[i].currentState?.toggleCard();
                                       },
                                     ),
@@ -148,6 +154,8 @@ class _ThreeCardsAppState extends State<ThreeCardsApp>
 
                                       _threeCardsController.drawing.value =
                                           true;
+                                      Audio audio = new Audio(chiaBaiMp3Path);
+                                      audio.playLocal();
                                       _threeCardsController.refreshCards();
                                       await Future.delayed(
                                           Duration(milliseconds: 100));
@@ -229,7 +237,8 @@ class _ThreeCardsAppState extends State<ThreeCardsApp>
                                         child: Image.asset(
                                             "assets/images/cards/back3-1.png")),
                                     onTap: () {
-
+                                      Audio audio = new Audio(latBaiMp3Path);
+                                      audio.playLocal();
                                       _threeCardsController.listKey2[i].currentState?.toggleCard();
                                     },
                                   ),

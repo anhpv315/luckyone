@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/DiceController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 import 'package:shake_event/shake_event.dart';
 
@@ -12,20 +13,22 @@ class DiceApp extends StatelessWidget {
   //all function or variables of main.dart will be here
 
   final DiceController _diceController = Get.put(DiceController());
-
+  String diceMp3Path = 'audio/xucxac.mp3';
   Future<void> changeDiceFace() async {
     var listResult = _diceController.listResult.value;
     _diceController.rolling.value = true;
+    Audio audio = new Audio(diceMp3Path);
+    audio.playLocal();
     //to update things we use setstate()
     // setState(() {
     //   leftDiceNumber = Random().nextInt(6)+1;
     //   rightDiceNumber = Random().nextInt(6)+1;
     // });
     var sum = 0;
-    for (var s = 0; s < 69; s++) {
+    for (var s = 0; s < 28; s++) {
       for (var i = 0; i < _diceController.listDiceFaces.length; i++) {
         _diceController.listDiceFaces[i] = Randomize().randomDice();
-        if (s == 68) {
+        if (s == 27) {
           sum += _diceController.listDiceFaces[i];
         }
       }
@@ -49,9 +52,12 @@ class DiceApp extends StatelessWidget {
       listResult.removeAt(0);
     }
     // print(listResult);
+    audio.stopAudio();
     _diceController.listResult.value = listResult;
     _diceController.listResult.refresh();
+
     _diceController.rolling.value = false;
+
 
   }
 

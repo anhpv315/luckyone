@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/WheelController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class WheelApp extends StatelessWidget {
 
   final WheelController _wheelController = Get.put(WheelController());
   TextEditingController _inputController = new TextEditingController();
+  String rollMp3Path = 'audio/quaybanhxe.mp3';
 
   Widget _listWheelItems(
       List<String> list, BuildContext context, StreamController<int> selected) {
@@ -62,6 +64,8 @@ class WheelApp extends StatelessWidget {
                 }
                 int random = Randomize().randomInRange(list.length);
                 selected.add(random);
+                Audio audio = new Audio(rollMp3Path);
+                audio.playLocal();
                 _wheelController.selected.value = random;
               }));
     }

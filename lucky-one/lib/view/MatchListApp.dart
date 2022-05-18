@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/MatchListController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class MatchListApp extends StatelessWidget {
       Get.put(MatchListController());
   TextEditingController _inputLeftController = new TextEditingController();
   TextEditingController _inputRightController = new TextEditingController();
+  String tingMp3Path = 'audio/raketqua.mp3';
 
   // Widget _listMatchListItems(
   //     List<String> list, BuildContext context, StreamController<int> selected) {
@@ -156,139 +158,147 @@ class MatchListApp extends StatelessWidget {
                               ),
                             )))),
                   )),
-              Container(
-                  width: width / 3,
-                  padding: EdgeInsets.all(30),
-                  child: SizedBox(
-                      width: width / 3 - 50,
-                      height: 68,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: AppTheme.nearlyWhite),
-                          onPressed: () {
-                            if (_matchListController.leftList.length < 2 ||
-                                _matchListController.rightList.length < 2) {
-                              return;
-                            }
-                            var left, right = [];
-                            left = new List<String>.from(_matchListController.leftList.value);
-                            right = new List<String>.from(_matchListController.rightList.value);
-                            if (left.length > right.length) {
-                              for(var i = right.length; i < left.length; i++){
-                                right.add('');
-                              }
-                            } else if(left.length < right.length) {
-                              for(var i = left.length; i < right.length; i++){
-                                left.add('');
-                              }                            }
 
-                            _matchListController.listResult.length = 0;
-                            for (var i = 0; i < left.length; i++) {
-                              var random = Randomize().randomInRange(right.length);
-                              var str = (left[i] == ''? '*': left[i]) + ' - '+ (right[random] ==''? '*': right[random]);
-                              right.removeAt(random);
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(top: 80, bottom: 30, left: 30, right: 30),
+                      width: width / 3,
+                      child: SizedBox(
+                          width: width / 3 - 50,
+                          height: 68,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: AppTheme.nearlyWhite),
+                              onPressed: () {
+                                if (_matchListController.leftList.length < 2 ||
+                                    _matchListController.rightList.length < 2) {
+                                  return;
+                                }
+                                var left, right = [];
+                                left = new List<String>.from(_matchListController.leftList.value);
+                                right = new List<String>.from(_matchListController.rightList.value);
+                                if (left.length > right.length) {
+                                  for(var i = right.length; i < left.length; i++){
+                                    right.add('');
+                                  }
+                                } else if(left.length < right.length) {
+                                  for(var i = left.length; i < right.length; i++){
+                                    left.add('');
+                                  }                            }
 
-                              _matchListController.listResult.value.add(str);
-                            }
+                                _matchListController.listResult.length = 0;
+                                for (var i = 0; i < left.length; i++) {
+                                  var random = Randomize().randomInRange(right.length);
+                                  var str = (left[i] == ''? '*': left[i]) + ' - '+ (right[random] ==''? '*': right[random]);
+                                  right.removeAt(random);
 
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    backgroundColor: Colors.grey.withOpacity(0.4),
+                                  _matchListController.listResult.value.add(str);
+                                }
+                                Audio audio = new Audio(tingMp3Path);
+                                audio.playLocal();
 
-                                    content: SingleChildScrollView(
-                                      child:
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor: Colors.grey.withOpacity(0.4),
+
+                                        content: SingleChildScrollView(
+                                          child:
                                           Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Container(
-                                              width: width - 60,
-                                              height: height - 200,
-                                              child: Center(
-                                                child: Obx(() => ListView.builder(
-                                                    shrinkWrap: true,
-                                                    itemCount: _matchListController.listResult.length,
-                                                    itemBuilder: (context, index) => Container(
-                                                        decoration: BoxDecoration(
-                                                          color: AppTheme.white,
-                                                          borderRadius: BorderRadius.all(Radius.circular(6))
-                                                        ),
-                                                        padding:
-                                                        EdgeInsets.only(bottom: 10, top: 10, right: 10),
-                                                        margin: EdgeInsets.only(top: 5, bottom: 5),
-                                                        child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text(
-                                                            _matchListController.listResult[index],
-                                                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                                                            overflow: TextOverflow.ellipsis,
-                                                          ),
-                                                        )))),
-                                              )),
-                                          Row(
-                                            mainAxisAlignment:
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Container(
+                                                  width: width - 60,
+                                                  height: height - 200,
+                                                  child: Center(
+                                                    child: Obx(() => ListView.builder(
+                                                        shrinkWrap: true,
+                                                        itemCount: _matchListController.listResult.length,
+                                                        itemBuilder: (context, index) => Container(
+                                                            decoration: BoxDecoration(
+                                                                color: AppTheme.white,
+                                                                borderRadius: BorderRadius.all(Radius.circular(6))
+                                                            ),
+                                                            padding:
+                                                            EdgeInsets.only(bottom: 10, top: 10, right: 10),
+                                                            margin: EdgeInsets.only(top: 5, bottom: 5),
+                                                            child: Align(
+                                                              alignment: Alignment.center,
+                                                              child: Text(
+                                                                _matchListController.listResult[index],
+                                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                                                overflow: TextOverflow.ellipsis,
+                                                              ),
+                                                            )))),
+                                                  )),
+                                              Row(
+                                                mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(8.0),
-                                                child: RaisedButton(
-                                                  child: Icon(Icons.refresh, color: AppTheme.nearlyWhite,),
-                                                  color: AppTheme.nearlyBlack,
-                                                  onPressed: () {
-                                                    if (_matchListController.leftList.length < 2 ||
-                                                        _matchListController.rightList.length < 2) {
-                                                      return;
-                                                    }
-                                                    var left, right = [];
-                                                    left = new List<String>.from(_matchListController.leftList.value);
-                                                    right = new List<String>.from(_matchListController.rightList.value);
-                                                    if (left.length > right.length) {
-                                                      for(var i = right.length; i < left.length; i++){
-                                                        right.add('');
-                                                      }
-                                                    } else if(left.length < right.length) {
-                                                      for(var i = left.length; i < right.length; i++){
-                                                        left.add('');
-                                                      }                            }
-
-                                                    _matchListController.listResult.length = 0;
-                                                    for (var i = 0; i < left.length; i++) {
-                                                      var random = Randomize().randomInRange(right.length);
-                                                      var str = (left[i] == ''? '*': left[i]) + ' - '+ (right[random] ==''? '*': right[random]);
-                                                      right.removeAt(random);
-
-                                                      _matchListController.listResult.value.add(str);
-                                                    }
-                                                    _matchListController.listResult.refresh();
-                                                  },
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
+                                                children: [
+                                                  Padding(
+                                                    padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: RaisedButton(
-                                                  child: Text("Close",
-                                                      style: TextStyle(
-                                                          color:
-                                                              AppTheme.white)),
-                                                  color: AppTheme.nearlyWhite,
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ),
+                                                    child: RaisedButton(
+                                                      child: Icon(Icons.refresh, color: AppTheme.nearlyWhite,),
+                                                      color: AppTheme.nearlyBlack,
+                                                      onPressed: () {
+                                                        if (_matchListController.leftList.length < 2 ||
+                                                            _matchListController.rightList.length < 2) {
+                                                          return;
+                                                        }
+                                                        var left, right = [];
+                                                        left = new List<String>.from(_matchListController.leftList.value);
+                                                        right = new List<String>.from(_matchListController.rightList.value);
+                                                        if (left.length > right.length) {
+                                                          for(var i = right.length; i < left.length; i++){
+                                                            right.add('');
+                                                          }
+                                                        } else if(left.length < right.length) {
+                                                          for(var i = left.length; i < right.length; i++){
+                                                            left.add('');
+                                                          }                            }
 
+                                                        _matchListController.listResult.length = 0;
+                                                        for (var i = 0; i < left.length; i++) {
+                                                          var random = Randomize().randomInRange(right.length);
+                                                          var str = (left[i] == ''? '*': left[i]) + ' - '+ (right[random] ==''? '*': right[random]);
+                                                          right.removeAt(random);
+
+                                                          _matchListController.listResult.value.add(str);
+                                                        }
+                                                        _matchListController.listResult.refresh();
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    const EdgeInsets.all(8.0),
+                                                    child: RaisedButton(
+                                                      child: Text("Close",
+                                                          style: TextStyle(
+                                                              color:
+                                                              AppTheme.white)),
+                                                      color: AppTheme.nearlyWhite,
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                  ),
+
+                                                ],
+                                              )
                                             ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                });
-                          },
-                          child: Image.asset("assets/icons/merge.png")))),
+                                          ),
+                                        ),
+                                      );
+                                    });
+                              },
+                              child: Image.asset("assets/icons/merge.png")))),
+                ],
+              ),
               Container(
                   width: width / 3,
                   height: height - 30,
@@ -536,7 +546,7 @@ class MatchListApp extends StatelessWidget {
         },
         child: Icon(
           Icons.list,
-          color: AppTheme.white,
+          color: AppTheme.nearlyBlack,
         ),
       ),
     );

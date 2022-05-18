@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/LuckyNumberController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 
 class LuckyNumberApp extends StatelessWidget {
   //all function or variables of main.dart will be here
+  String tingMp3Path = 'audio/ting.mp3';
 
   final LuckyNumberController _luckyNumberController =
       Get.put(LuckyNumberController());
@@ -150,6 +152,9 @@ class LuckyNumberApp extends StatelessWidget {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: AppTheme.nearlyWhite),
                 onPressed: () async {
+                  if(_luckyNumberController.rolling.value){
+                    return;
+                  }
                   _luckyNumberController.rolling.value = true;
                   for (var i = 0;
                   i < _luckyNumberController.listResult.length;
@@ -164,8 +169,9 @@ class LuckyNumberApp extends StatelessWidget {
                     for (var i = 0;
                         i < _luckyNumberController.listResult.length;
                         i++) {
-                      await Future.delayed(Duration(milliseconds: 500));
-
+                      await Future.delayed(Duration(milliseconds: 600));
+                      Audio audio = new Audio(tingMp3Path);
+                      audio.playLocal();
                       var randomNumber = (min + Randomize().randomInRange(max - min)).toString();
                       while(_luckyNumberController.listResult.value.contains(randomNumber)){
                         randomNumber = (min + Randomize().randomInRange(max - min)).toString();

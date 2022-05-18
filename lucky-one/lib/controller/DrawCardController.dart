@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Constant.dart';
 
 class DrawCardController extends GetxController {
@@ -10,6 +11,7 @@ class DrawCardController extends GetxController {
 
   var vertical = 0.obs;
   var test = 0.obs;
+  String xepBaiMp3Path = 'audio/xepbai.mp3';
 
   @override
   void onInit() {
@@ -31,10 +33,12 @@ class DrawCardController extends GetxController {
       listDistances.value[i] = 0;
     }
     await Future.delayed(Duration(milliseconds: 400));
-
+    Audio audio = new Audio(xepBaiMp3Path);
+    audio.playLocal();
     vertical.value = 5;
     vertical.refresh();
     await Future.delayed(Duration(milliseconds: 400));
+
     cards.shuffle();
     cards.refresh();
     listResult.refresh();

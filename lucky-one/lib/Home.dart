@@ -24,9 +24,9 @@ class Home extends GetWidget<MainController> {
   Widget build(BuildContext context) {
     var title = 'Lucky One';
     var screenID = controller.currentScreen.value;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: AppTheme.nearlyBlack
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //     statusBarColor: AppTheme.nearlyBlack
+    // ));
 
     return GetMaterialApp(
       title: title,

@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/ArrowController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 import 'package:shake_event/shake_event.dart';
 
@@ -24,7 +25,8 @@ class _ArrowAppState extends State<ArrowApp> with TickerProviderStateMixin {
   late AnimationController rotationController;
   late Animation<double> animation;
   var oldPosition;
-  final int spinningTime = 5;
+  final int spinningTime = 10;
+  String rollMp3Path = 'audio/quaymuiten.mp3';
 
   @override
   void initState() {
@@ -71,10 +73,13 @@ class _ArrowAppState extends State<ArrowApp> with TickerProviderStateMixin {
               onTap: () {
                 // oldPosition = _arrowController.direction.value;
                 _arrowController.setRandomDirection();
+                Audio audio = new Audio(rollMp3Path);
+
                 // print(_arrowController.oldDirection);
                 setState(() {
                   rotationController.reset();
                   rotationController.forward();
+                  audio.playLocal();
                   Future.delayed(Duration(seconds: spinningTime), (){
                     _arrowController.oldDirection.value = _arrowController.direction.value;
                   });

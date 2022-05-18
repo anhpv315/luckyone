@@ -9,6 +9,10 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var height = MediaQuery.of(context).size.height;
+
+
     return Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -20,9 +24,15 @@ class MyDrawer extends StatelessWidget {
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
-              // SizedBox(
-              //   height: 10,
-              // ),
+             Container(
+               padding: EdgeInsets.all(10),
+               color: AppTheme.nearlyBlack,
+               height: height*0.06+40,
+               child: Align(
+                 alignment: Alignment.bottomCenter,
+                 child: Text('Powered by AnhPV', style: TextStyle(color: AppTheme.nearlyWhite, fontStyle: FontStyle.italic),),
+               ),
+             ),
               // SizedBox(
               //   height: 120,
               //   child: DrawerHeader(
@@ -37,9 +47,7 @@ class MyDrawer extends StatelessWidget {
               //     )),
               //   ),
               // ),
-              Divider(
-                color: AppTheme.nearlyBlack.withOpacity(0.8),
-              ),
+
               ListTile(
                 title: Row(
                   children: [

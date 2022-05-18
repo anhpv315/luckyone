@@ -16,12 +16,13 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppTheme.nearlyBlack,
         body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 40),
+                  margin: EdgeInsets.only(top: 60),
                   width: width * 0.6,
                   child: Image.asset('assets/images/logo.png'),
                 ),
@@ -33,7 +34,8 @@ class SplashScreen extends StatelessWidget {
 
                     Align(
                       alignment: Alignment.topLeft,
-                      child: AnimatedTextKit(
+                      child:
+                      AnimatedTextKit(
                         animatedTexts: [
                           TypewriterAnimatedText(
 
@@ -66,6 +68,7 @@ class SplashScreen extends StatelessWidget {
           ),
           onTap: () async {
             print('tab');
+            main.audio.stopAudio();
             main.currentScreen.value = 0;
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.setString('screenID', '0');

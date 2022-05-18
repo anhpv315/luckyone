@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:lucky_one/common/widget/drawer.dart';
 import 'package:lucky_one/controller/DrawCardController.dart';
 import 'package:lucky_one/ulti/AppTheme.dart';
+import 'package:lucky_one/ulti/Audio.dart';
 import 'package:lucky_one/ulti/Randomize.dart';
 import 'package:shake_event/shake_event.dart';
 
@@ -12,9 +13,11 @@ class DrawCardApp extends StatelessWidget {
   //all function or variables of main.dart will be here
 
   final DrawCardController _drawCardController = Get.put(DrawCardController());
+  String rutBaiMp3Path = 'audio/chia1labai.mp3';
 
   Widget _listResultCardsWidgets(String selected, BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     List<Widget> list1 = [];
 
     list1.add(Container(
@@ -43,27 +46,41 @@ class DrawCardApp extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          padding: EdgeInsets.only(top: 20),
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: AppTheme.nearlyWhite,
+          // color: Colors.yellow,
+          height: height - 60,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 60),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppTheme.nearlyWhite,
+                    ),
+                    onPressed: () {
+
+                      _drawCardController.refreshCards();
+                    },
+                    child: Icon(Icons.refresh, color: AppTheme.white)),
               ),
-              onPressed: () {
-                _drawCardController.refreshCards();
-              },
-              child: Icon(Icons.refresh, color: AppTheme.nearlyBlack)),
+              Container(
+                  padding: EdgeInsets.only(left: 10),
+                  width: width * 0.5,
+                  child: Row(children: list1)),
+              SizedBox(
+                height: 5,
+              )
+            ],
+          ),
         ),
-        Container(
-            padding: EdgeInsets.only(left: 10),
-            width: width * 0.5,
-            child: Row(children: list1)),
+
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-              padding: EdgeInsets.only(left: 10),
+              // padding: EdgeInsets.only(left: 10),
               // color: Colors.red,
               width: width * 0.5,
-              height: 50,
+              height: 60,
               child:
     _drawCardController.listResult.isNotEmpty? Obx(() => _preResults(_drawCardController.listResult.value)): Container()),
         )
@@ -100,7 +117,7 @@ class DrawCardApp extends StatelessWidget {
     List<Widget> list1 = [];
 
     list1.add(Container(
-      height: list.length * 60 + 300,
+      height: list.length * 60 + 100,
     ));
     for (var i = 0; i < list.length; i++) {
       list1.add(
@@ -114,6 +131,8 @@ class DrawCardApp extends StatelessWidget {
                 if(_drawCardController.drawing.value || _drawCardController.cards[i] == 'remove'){
                   return;
                 }
+                Audio audio = new Audio(rutBaiMp3Path);
+                audio.playLocal();
                 // print(list[i]);
                 _drawCardController.drawing.value = true;
                 // _drawCardController.selected.value = list[i];
@@ -196,14 +215,14 @@ class DrawCardApp extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(top: 20),
                     width: width * 0.5,
-                    height: height - 100,
+                    height: height - 60,
                     child: Obx(
                           () =>
                           _listBackCardsWidgets(_drawCardController.cards, context),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(20),
+                  SizedBox(
+                    height: 40,
                    child: Obx(
                            () => Row(
                     children: [
@@ -215,8 +234,8 @@ class DrawCardApp extends StatelessWidget {
               ),
 
               Container(
+                // color: Colors.green,
                 width: width * 0.5,
-                height: height - 50,
                 child: Obx(
                   () => _listResultCardsWidgets(
                       _drawCardController.selected.value, context),
