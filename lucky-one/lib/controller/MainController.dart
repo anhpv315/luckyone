@@ -17,7 +17,7 @@ class MainController extends GetxController {
   Future<void> onInit() async {
     currentScreen.value = -1;
     audio = new Audio(audioPath);
-    // audio.playLocal();
+    audio.playLocal();
     await Future.delayed(Duration(seconds: 9));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();

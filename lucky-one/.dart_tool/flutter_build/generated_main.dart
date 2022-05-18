@@ -5,10 +5,10 @@
 
 // @dart = 2.12
 
-// When `package:lucky_one/main.dart` defines `main`, that definition is shadowed by the definition below.
-export 'package:lucky_one/main.dart';
+// When `package:LuckyOne/main.dart` defines `main`, that definition is shadowed by the definition below.
+export 'package:LuckyOne/main.dart';
 
-import 'package:lucky_one/main.dart' as entrypoint;
+import 'package:LuckyOne/main.dart' as entrypoint;
 import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:path_provider_android/path_provider_android.dart';
 import 'package:shared_preferences_android/shared_preferences_android.dart';
