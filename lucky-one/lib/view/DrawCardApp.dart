@@ -180,18 +180,23 @@ class DrawCardApp extends StatelessWidget {
       //   backgroundColor: Colors.blue,
       // ),
       body: SingleChildScrollView(
-          child: Center(
+          child: Container(
+            width: width,
+              height: height,
               child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
+                    padding: EdgeInsets.only(top: 20),
                     width: width * 0.5,
-                    height: height - 80,
+                    height: height - 100,
                     child: Obx(
                           () =>
                           _listBackCardsWidgets(_drawCardController.cards, context),
@@ -211,7 +216,7 @@ class DrawCardApp extends StatelessWidget {
 
               Container(
                 width: width * 0.5,
-                height: height - 30,
+                height: height - 50,
                 child: Obx(
                   () => _listResultCardsWidgets(
                       _drawCardController.selected.value, context),
